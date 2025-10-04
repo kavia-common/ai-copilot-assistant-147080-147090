@@ -31,6 +31,7 @@ function App() {
     setMessages(next);
     setLoading(true);
     try {
+      // Default to same-origin API in preview/prod; falls back to env if provided
       const data = await postChat(next);
       setMessages([...next, { role: 'assistant', content: data.reply }]);
     } catch (e) {
