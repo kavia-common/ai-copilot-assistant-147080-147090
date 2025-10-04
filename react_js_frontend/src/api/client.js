@@ -1,4 +1,15 @@
-const baseUrl = (process.env.REACT_APP_API_BASE_URL || 'http://localhost:3001').replace(/\/$/, '');
+/**
+ * Determine base URL for API requests.
+ * - In development with CRA proxy, leave base empty '' to use relative paths so that setupProxy.js handles routing.
+ * - If REACT_APP_API_BASE_URL is provided (e.g., in production), use it.
+ * - Avoid forcing http://localhost:3001 by default to prevent mixed-content under HTTPS; instead prefer '' so same-origin or proxy is used.
+ */
+const resolvedBase =
+  typeof process !== 'undefined' && process.env && process.env.NODE_ENV !== 'production'
+    ? '' // dev: rely on CRA proxy when available
+    : (process.env.REACT_APP_API_BASE_URL || '').replace(/\/$/, ''); // prod: require explicit base or same-origin
+
+const baseUrl = resolvedBase;
 
 /**
  * INTERNAL: Generic JSON fetch wrapper with timeout and robust error handling.
@@ -61,7 +72,7 @@ async function request(path, options = {}) {
 // PUBLIC_INTERFACE
 export async function getHealth() {
   /** Checks backend health. Returns parsed JSON or text (depending on backend). */
-  return request('/');
+  return request('/health');
 }
 
 // PUBLIC_INTERFACE
