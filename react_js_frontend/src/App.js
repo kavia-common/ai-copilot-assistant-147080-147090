@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar';
 import TopBar from './components/TopBar';
 import MessageList from './components/Chat/MessageList';
 import MessageInput from './components/Chat/MessageInput';
+import { postChat } from './api/client';
 
 /**
  * Root application that renders the Ocean Professional minimalist layout with:
@@ -26,19 +27,16 @@ function App() {
     setMessages(next);
     setLoading(true);
     try {
-      const base = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3001';
-      const res = await fetch(`${base}/api/chat`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: next })
-      });
-      if (!res.ok) throw new Error(`Request failed: ${res.status}`);
-      const data = await res.json();
+      const data = await postChat(next);
       setMessages([...next, { role: 'assistant', content: data.reply }]);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e);
-      setError('Something went wrong. Please try again.');
+      const msg =
+        e?.message ||
+        (e?.body && (e.body.message || e.body.detail || e.body.error)) ||
+        'Something went wrong. Please try again.';
+      setError(msg);
     } finally {
       setLoading(false);
     }
