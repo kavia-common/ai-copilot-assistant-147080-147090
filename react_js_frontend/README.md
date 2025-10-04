@@ -4,10 +4,33 @@ This project provides a minimal React template with a clean, modern UI and minim
 
 ## Features
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- Lightweight: No heavy UI frameworks - uses only vanilla CSS and React
+- Modern UI: Clean, responsive design with KAVIA brand styling
+- Fast: Minimal dependencies for quick loading times
+- Simple: Easy to understand and modify
+
+## Environment Setup
+
+Configure environment variables to point the frontend to your backend and optionally enable Supabase.
+
+1) Copy the example file and edit as needed:
+   cp .env.example .env
+
+2) Variables:
+- REACT_APP_API_BASE_URL
+  - Base URL for the FastAPI backend (no trailing slash)
+  - Default used by the app if not set: http://localhost:3001
+  - Used in: src/api/client.js to build endpoints such as `${REACT_APP_API_BASE_URL}/api/chat`
+- REACT_APP_SUPABASE_URL (optional)
+  - Your Supabase project URL (only needed if enabling Supabase features)
+- REACT_APP_SUPABASE_ANON_KEY (optional)
+  - Your Supabase anon public key (only needed if enabling Supabase features)
+
+Notes:
+- Create React App only exposes variables prefixed with REACT_APP_ to the browser.
+- For production deployments, set these variables via your hosting provider’s environment configuration.
+
+For a concise reference, see ENVIRONMENT.md.
 
 ## Getting Started
 
@@ -16,7 +39,7 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open http://localhost:3000 to view it in your browser.
 
 ### `npm test`
 
@@ -26,6 +49,15 @@ Launches the test runner in interactive watch mode.
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
+
+## How configuration is used
+
+- API Base URL
+  - The code reads REACT_APP_API_BASE_URL in src/api/client.js and defaults to http://localhost:3001.
+  - All API calls are prefixed with this base URL (e.g., /api/chat).
+- Supabase (optional)
+  - If you wire Supabase into the app, initialize the client with REACT_APP_SUPABASE_URL and REACT_APP_SUPABASE_ANON_KEY.
+  - These variables are optional and unused unless such integration is added.
 
 ## Customization
 
@@ -55,28 +87,28 @@ Common components include:
 
 ## Learn More
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To learn React, check out the React documentation: https://reactjs.org/
 
 ### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
 ### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
 ### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
 ### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
