@@ -10,7 +10,7 @@ export default function Sidebar({ onNewChat }) {
     <aside className="sidebar" aria-label="Sidebar">
       <div className="sidebar-header">AI Copilot</div>
       <nav className="sidebar-nav" aria-label="Main Navigation">
-        <button className="nav-item" aria-label="New Chat" onClick={onNewChat}>+ New Chat</button>
+        <button type="button" className="nav-item" aria-label="New Chat" onClick={onNewChat}>+ New Chat</button>
         <div className="nav-section" aria-hidden>Recent</div>
         <ul className="nav-list">
           <li

@@ -17,7 +17,9 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui
 .app-title{font-size:16px;margin:0;color:var(--primary)}
 .topbar-actions{display:flex;gap:8px;align-items:center}
 .action-btn{border:none;background:transparent;cursor:pointer;font-size:18px}
-.avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#F3F4F6}
+.action-btn:focus-visible{outline:2px solid #111827; outline-offset:2px}
+.avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#F3F4F6; border: none}
+.avatar:focus-visible{outline:2px solid #111827; outline-offset:2px}
 .main{grid-column:2;grid-row:2;display:flex;flex-direction:column;height:100%;}
 .message-list{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--surface)}
 .message{display:flex}
